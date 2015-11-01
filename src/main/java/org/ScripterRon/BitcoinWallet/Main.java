@@ -121,6 +121,11 @@ public class Main {
      */
     public static void main(String[] args) {
         try {
+            // MULTICHAIN: START
+            System.setProperty("multichain.genesis.blockhash", System.getenv("SCRIPTERRON_BITCOIN_MULTICHAIN_DEMO_BLOCKHASH"));
+            System.setProperty("multichain.genesis.blocktime", System.getenv("SCRIPTERRON_BITCOIN_MULTICHAIN_DEMO_BLOCKTIME"));
+            // MULTICHAIN: END
+
             fileSeparator = System.getProperty("file.separator");
             lineSeparator = System.getProperty("line.separator");
             userHome = System.getProperty("user.home");

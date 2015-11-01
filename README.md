@@ -1,3 +1,73 @@
+BitcoinWallet-Multichain
+========================
+This is a patched version of Scripter Ron's BitcoinWallet which supports connecting to private blockchains created by Multichain, where the blockchain is configured to behave like Bitcoin.
+
+To get started:
+
+#### 1. Create a MultiChain network with Bitcoin behaviour
+
+There is an example Multichain params.dat file in the repository:
+```
+	multichain_bitcoin.params.dat
+```
+
+You can use this file to help create a MultiChain network which behaves like the Bitcoin network:
+```
+	multichain-util create bitcoin
+	cp multichain_bitcoin.params.dat ~/.multichain/bitcoin/params.dat
+```
+
+You can change how often blocks are created by editing the file and adjusting the parameters:
+- target-block-time
+- pow-minimum-bits
+
+To launch the network:
+```
+	multichaind bitcoin -daemon
+```
+
+#### 2. Set environment variables
+
+On the computer you will run BitcoinWallet from, set the following environment variables:
+
+SCRIPTERRON_BITCOIN_MULTICHAIN_DEMO_BLOCKHASH=00000038a4365db53d942612aace5e856ddc56aa4c1948b7dde599a64a3f2d88
+
+SCRIPTERRON_BITCOIN_MULTICHAIN_DEMO_BLOCKTIME=1446244285
+
+You can find these values at the end of the params.dat file which will have been updated by MultiChain.  Look for:
+- genesis-timestamp
+- genesis-hash
+
+
+#### 3. Build the patched version of Scripter Ron's BitcoinCore
+
+cd BitcoinCore-multichain
+mvn install compile
+
+This version of BitcoinCore:
+- disables verification of target difficulty in blocks
+- changes hard-coded genesis block values to use JVM system properties (which this patched Wallet will set based on environment variables).
+
+
+#### 4. Build the patched version of Scripter Ron's BitcoinWallet
+
+cd BitcoinWallet-multichain
+mvn install package
+
+
+#### 5. Set up BitconWallet.conf
+
+Copy the sample BitcoinWallet.conf to your $HOME/.BitcoinWallet folder and edit the IP address of your MultiChain node.
+By default, BitcoinWallet will try to connect to localhost.
+
+
+#### 6. Run BitcoinWallet
+
+java -jar target/BitcoinWallet-3.0.1.jar PROD
+
+
+
+
 BitcoinWallet
 =============
 
