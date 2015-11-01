@@ -2,6 +2,9 @@ BitcoinWallet-Multichain
 ========================
 This is a patched version of Scripter Ron's BitcoinWallet which supports connecting to private blockchains created by Multichain, where the blockchain is configured to behave like Bitcoin.
 
+You need to use the patched version of Scripter Ron's BitcoinCore found here:
+https://github.com/bitcartel/BitcoinCore-multichain/tree/multichain
+
 To get started:
 
 #### 1. Create a MultiChain network with Bitcoin behaviour
